@@ -1,5 +1,10 @@
+/* Definitioner av funktioner i gpio.c */
+/* inkludering av headerfil för mer strukturerad kod */
 #include "gpio.h"
 
+
+
+/* setup definierar DDR = data direction register och PORT-register */
 void setup(void)
 {
 	DDRD =  ((1 << LED1) | (1 << LED2));
@@ -9,6 +14,7 @@ void setup(void)
 	return;
 }
 
+/* delay_ms fördefinierad fördröjning ifrån delay bibliotek */
 void delay_ms(const uint16_t delay_time_ms)
 {
 	for (uint16_t i = 0; i < delay_time_ms; i++)
@@ -18,6 +24,7 @@ void delay_ms(const uint16_t delay_time_ms)
 	 return;
 }
 
+/* leds_on förenklar anrop i main */
 void leds_on(void)
 {
 	PORTD |= ((1 << LED1) | (1 << LED2)); 
@@ -25,6 +32,7 @@ void leds_on(void)
 	return;
 }
 
+/* leds_off förenklar anrop i main */
 void leds_off(void)
 {
 	PORTD &= ~((1 << LED1) | (1 << LED2)); 
@@ -32,32 +40,7 @@ void leds_off(void)
 	return;
 }
 
-/*
-void button1_pressed(void)
-{
-	if (BUTTON1_IS_PRESSED)
-	{
-		leds_blink_sequence();
-	}
-	else
-	{
-		leds_off();
-	}
-	
-	return;
-}
-*/
-
-void leds_blink_collectively(const uint16_t blink_speed_ms)
-{
-	
-    LEDS_ON;
-	delay_ms(blink_speed_ms);
-	LEDS_OFF;
-	delay_ms(blink_speed_ms);
-	return;
-}
-
+/* blink sekvens */
 void leds_blink_sequence(const uint16_t blink_speed_ms)
 {
 	
@@ -77,6 +60,7 @@ void leds_blink_sequence(const uint16_t blink_speed_ms)
 	return;
 }
 
+/* blink sekvens baklänges */
 void leds_blink_sequence_reverse(const uint16_t blink_speed_ms)
 {
 	delay_ms(blink_speed_ms);
